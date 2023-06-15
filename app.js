@@ -1,11 +1,15 @@
 const axios = require('axios');
 const express = require('express');
-const { json } = require('body-parser');
+const bodyParser = require('body-parser');
 
+const morgan = require('morgan');
 
 const app = express();
 
-app.use(json({ limit: "5mb" }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(morgan('combined'));
+
 app.get('/', (req, res) => {
     return res.status(200).json({
         status: true,
